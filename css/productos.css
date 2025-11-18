@@ -1,0 +1,129 @@
+/* RESET */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial; }
+
+body {
+    background: #ffffff;
+    color: #000000;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #00157a;
+    color: white;
+    padding: 15px;
+}
+
+.logo { font-size: 32px; }
+.titulo-app { font-size: 20px; font-weight: bold; }
+.nombre-alumno { font-size: 12px; }
+
+.nav a {
+    margin-left: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav a.activo {
+    border-bottom: 2px solid white;
+}
+
+/* BUSCADOR */
+.buscador {
+    padding: 20px;
+    text-align: center;
+}
+
+#input-buscar {
+    width: 300px;
+    padding: 8px;
+    border: 2px solid #00157a;
+}
+
+/* CATEGORÍA */
+.categoria {
+    padding: 20px;
+}
+
+.categoria h2 {
+    color: #00157a;
+    margin-bottom: 10px;
+}
+
+/* CARRUSEL */
+.carrusel {
+    position: relative;
+    border: 2px solid black;
+    padding: 20px 40px;
+    overflow: hidden;
+}
+
+/* Listado */
+.lista-productos {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    /*scroll-behavior: smooth;*/
+    /*width: 850px;
+    padding-bottom: 10px;*/
+}
+
+/* Tarjeta de producto */
+.producto {
+    min-width: 190px;
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+    background: white;
+}
+
+.producto img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border: 2px solid black;
+    margin-bottom: 8px;
+}
+
+.producto-nombre { font-weight: bold; margin-bottom: 4px; }
+.producto-precio { margin-bottom: 10px; }
+
+/* Controles */
+.controles {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.cantidad {
+    width: 50px;
+    border: 1px solid #00157a;
+    padding: 4px;
+}
+
+.btn-agregar {
+    background: #00157a;
+    color: white;
+    padding: 6px 8px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Flechas */
+.flecha {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: 2px solid black;
+    width: 30px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.izquierda { left: 5px; }
+.derecha { right: 5px; }
