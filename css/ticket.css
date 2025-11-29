@@ -7,19 +7,18 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #ffffff;   /* fondo blanco */
-    color: #00157a;              /* texto azul */
+    background-color: #ffffff;
+    color: #00157a;
 }
 
-/* === header simple === */
-
+/* === header igual que en productos/carrito === */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 8px 16px;
-    background-color: #00157a;   /* azul */
-    color: #ffffff;              /* texto blanco */
+    background-color: #00157a;
+    color: #ffffff;
 }
 
 .logo {
@@ -55,7 +54,7 @@ body {
 /* === contenido === */
 
 .main {
-    max-width: 1000px;
+    max-width: 800px;
     margin: 16px auto;
     padding: 0 16px;
 }
@@ -65,62 +64,74 @@ body {
     margin-bottom: 12px;
 }
 
-/* === grilla de productos === */
+/* card ticket */
 
-.contenedor-productos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px;
-}
-
-/* card simple */
-.card-producto {
+.card-simple {
     border: 1px solid #00157a;
     border-radius: 6px;
-    padding: 8px;
+    padding: 10px;
 }
 
-.card-producto img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 4px;
+.titulo-tienda {
+    font-size: 1rem;
     margin-bottom: 6px;
 }
 
-.card-producto h3 {
-    font-size: 0.95rem;
-    margin-bottom: 4px;
-}
-
-.card-producto p {
-    font-size: 0.8rem;
+.card-simple p {
+    font-size: 0.9rem;
     margin: 2px 0;
 }
 
-/* parte de abajo: cantidad + botón */
+.subtitulo {
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+}
 
-.card-footer {
-    margin-top: 6px;
+/* items */
+
+.ticket-items {
+    border-top: 1px solid #00157a33;
+    margin-top: 4px;
+    padding-top: 4px;
+    font-size: 0.9rem;
+}
+
+.ticket-items .item {
+    padding: 4px 0;
+    border-bottom: 1px solid #00157a1f;
+}
+
+.ticket-items .item:last-child {
+    border-bottom: none;
+}
+
+/* total */
+
+.total {
+    margin-top: 8px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 6px;
+    font-weight: bold;
 }
 
-.card-footer input {
-    width: 50px;
-    padding: 2px;
-    font-size: 0.8rem;
+/* botón */
+
+.acciones {
+    margin-top: 10px;
 }
 
-.card-footer button {
-    flex: 1;
+.btn {
     border: none;
-    padding: 4px 6px;
-    font-size: 0.8rem;
+    padding: 6px 12px;
+    font-size: 0.9rem;
     border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-principal {
     background-color: #00157a;
     color: #ffffff;
-    cursor: pointer;
 }

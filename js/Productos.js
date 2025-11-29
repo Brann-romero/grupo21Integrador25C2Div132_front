@@ -1,100 +1,83 @@
-// 🌟 Datos de ejemplo (luego vendrán del backend)
-const productos = [
-    // GUITARRAS
-    { id: 1, categoria: "Guitarra", nombre: "Stratocaster", precio: 150000, ruta_img: "img/guitarras/1.jpg", activo: true },
-    { id: 2, categoria: "Guitarra", nombre: "Les Paul", precio: 200000, ruta_img: "img/guitarras/2.jpg", activo: true },
-    { id: 3, categoria: "Guitarra", nombre: "Telecaster", precio: 180000, ruta_img: "img/guitarras/3.jpg", activo: true },
-    { id: 4, categoria: "Guitarra", nombre: "Stratocaster", precio: 150000, ruta_img: "img/guitarras/4.jpg", activo: true },
-    { id: 5, categoria: "Guitarra", nombre: "Les Paul", precio: 200000, ruta_img: "img/guitarras/5.jpg", activo: true },
-    { id: 6, categoria: "Guitarra", nombre: "Telecaster", precio: 180000, ruta_img: "img/guitarras/6.jpg", activo: true },
-    { id: 7, categoria: "Guitarra", nombre: "Stratocaster", precio: 150000, ruta_img: "img/guitarras/7.jpg", activo: true },
-    { id: 8, categoria: "Guitarra", nombre: "Les Paul", precio: 200000, ruta_img: "img/guitarras/8.jpg", activo: true },
-    { id: 9, categoria: "Guitarra", nombre: "Telecaster", precio: 180000, ruta_img: "img/guitarras/9.jpg", activo: true },
-    { id: 10, categoria: "Guitarra", nombre: "Telecaster", precio: 180000, ruta_img: "img/guitarras/10.jpg", activo: true },
+// Productos.js
+let contenedorProductos = document.getElementById("contenedor-productos");
+let url = "http://localhost:3000";
 
-    // PRÓTESIS
-    { id: 11, categoria: "Protesis", nombre: "Ananá", precio: 200, ruta_img: "img/protesis/1.jpg", activo: true },
-    { id: 12, categoria: "Protesis", nombre: "Modelo Alpha", precio: 500, ruta_img: "img/protesis/2.jpg", activo: true },
-    { id: 13, categoria: "Protesis", nombre: "Modelo Beta", precio: 750, ruta_img: "img/protesis/3.jpg", activo: true },
-    { id: 14, categoria: "Protesis", nombre: "Ananá", precio: 200, ruta_img: "img/protesis/4.jpg", activo: true },
-    { id: 15, categoria: "Protesis", nombre: "Modelo Alpha", precio: 500, ruta_img: "img/protesis/5.jpg", activo: true },
-    { id: 16, categoria: "Protesis", nombre: "Modelo Beta", precio: 750, ruta_img: "img/protesis/6.jpg", activo: true },
-    { id: 17, categoria: "Protesis", nombre: "Ananá", precio: 200, ruta_img: "img/protesis/7.jpg", activo: true },
-    { id: 18, categoria: "Protesis", nombre: "Modelo Alpha", precio: 500, ruta_img: "img/protesis/8.jpg", activo: true },
-    { id: 19, categoria: "Protesis", nombre: "Modelo Beta", precio: 750, ruta_img: "img/protesis/9.jpg", activo: true },
-    { id: 20, categoria: "Protesis", nombre: "Modelo Beta", precio: 750, ruta_img: "img/protesis/10.jpg", activo: true }
-];
-
-let carrito = [];
-let filtro = "";
-
-// Render de tarjetas
-function renderCategoria(cat, contenedorID) {
-    const cont = document.getElementById(contenedorID);
-    cont.innerHTML = "";
-
-    productos
-        .filter(p => p.activo)
-        .filter(p =>
-            p.categoria.toLowerCase() === cat.toLowerCase() &&
-            (p.nombre.toLowerCase().includes(filtro) || p.categoria.toLowerCase().includes(filtro))
-        )
-        .forEach(p => {
-            const card = document.createElement("div");
-            card.className = "producto";
-            card.innerHTML = `
-                <img src="${p.ruta_img}">
-                <div class="producto-nombre">${p.nombre}</div>
-                <div class="producto-precio">$${p.precio}</div>
-
-                <div class="controles">
-                    <input type="number" min="1" value="1" class="cantidad">
-                    <button class="btn-agregar" data-id="${p.id}">Agregar</button>
-                </div>
-            `;
-            cont.appendChild(card);
-        });
+// Traigo los productos de la API
+async function obtenerProductos() {
+    try {
+        const response = await fetch(`${url}/productos`);
+        const data = await response.json();
+        const productos = data.payload;
+        mostrarProductos(productos);
+    } catch (error) {
+        console.error("Error obteniendo productos:", error);
+    }
 }
 
-function actualizarVista() {
-    renderCategoria("Guitarra", "lista-guitarras");
-    renderCategoria("Protesis", "lista-protesis");
+// Armo las cards y les agrego el botón de carrito
+function mostrarProductos(array) {
+    let html = "";
+
+    array.forEach(prod => {
+        html += `
+        <article class="card-producto">
+            <img src="${prod.img}" alt="${prod.nombre}">
+            <h3>${prod.nombre}</h3>
+            <p>Id: ${prod.id}</p>
+            <p>Categoría: ${prod.categoria}</p>
+            <p>Precio: $${prod.precio}</p>
+            <div class="card-footer">
+                <input type="number" min="1" value="1" class="input-cantidad">
+                <button
+                    class="btn-agregar"
+                    data-id="${prod.id}"
+                    data-nombre="${prod.nombre}"
+                    data-precio="${prod.precio}"
+                >
+                    Agregar al carrito
+                </button>
+            </div>
+        </article>
+        `;
+    });
+
+    contenedorProductos.innerHTML = html;
+
+    // Después de pintar las cards, activo los botones
+    BotonesAgregar();
 }
 
-// Búsqueda
-document.getElementById("input-buscar").addEventListener("input", e => {
-    filtro = e.target.value.toLowerCase();
-    actualizarVista();
-});
+// Función que maneja el localStorage del carrito
+function BotonesAgregar() {
+    const botones = document.querySelectorAll(".btn-agregar");
 
-// Flechas
-document.addEventListener("click", e => {
-    if (e.target.classList.contains("flecha")) {
-        const lista = document.getElementById(e.target.dataset.target);
-        lista.scrollLeft += e.target.classList.contains("izquierda") ? -250 : 250;
-    }
-});
+    botones.forEach(boton => {
+        boton.addEventListener("click", () => {
+            const id = boton.dataset.id;
+            const nombre = boton.dataset.nombre;
+            const precio = Number(boton.dataset.precio);
 
-// Agregar al carrito
-document.addEventListener("click", e => {
-    if (e.target.classList.contains("btn-agregar")) {
+            // Busco el input de cantidad en la misma card
+            const input = boton.parentElement.querySelector(".input-cantidad");
+            const cantidad = Number(input.value) || 1;
 
-        const id = Number(e.target.dataset.id);
-        const prod = productos.find(p => p.id === id);
-        const card = e.target.closest(".producto");
-        const cantidad = Number(card.querySelector(".cantidad").value);
+            // Leo el carrito actual (si no existe, uso array vacío)
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-        carrito.push({
-            id: prod.id,
-            nombre: prod.nombre,
-            precio: prod.precio,
-            cantidad
+            // Busco si el producto ya estaba en el carrito
+            const existente = carrito.find(item => item.id == id);
+
+            if (existente) {
+                existente.cantidad += cantidad;
+            } else {
+                carrito.push({ id, nombre, precio, cantidad });
+            }
+
+            // Guardo de nuevo el carrito
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+
         });
+    });
+}
 
-        console.log(carrito);
-        alert(`${cantidad} x ${prod.nombre} agregado al carrito`);
-    }
-});
-
-// Inicializar
-actualizarVista();
+obtenerProductos();

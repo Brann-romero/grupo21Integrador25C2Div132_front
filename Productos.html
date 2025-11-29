@@ -1,59 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos – Autoservicio</title>
+    <link rel="icon" type="image/png" href="img/icono/icono.jpg">
     <link rel="stylesheet" href="css/productos.css">
+    <script src="js/Productos.js" defer></script>
 </head>
+
 <body>
-
-    <!-- HEADER -->
     <header class="header">
-        <div class="logo">🎸</div>
-
-        <h1 class="titulo-app">AutoServicio Pro Music</h1>
-
-        <div class="nombre-alumno">Brandon Ezequiel Romero</div>
+        <div class="logo">
+            <div class="logo-circulo">G</div>
+            <span>Guitanos Autoservicio</span>
+        </div>
 
         <nav class="nav">
-            <a href="inicio.html">Inicio</a>
-            <a class="activo" href="productos.html">Productos</a>
+            <a href="index.html">Inicio</a>
+            <a href="productos.html" class="activo">Productos</a>
+            <a href="carrito.html">Carrito</a>
             <a href="ticket.html">Ticket</a>
         </nav>
     </header>
 
-    <!-- BUSCADOR -->
-    <section class="buscador">
-        <input id="input-buscar" type="text" placeholder="Buscar por nombre o categoría...">
-    </section>
+    <main class="main">
+        <h1 class="titulo">Productos</h1>
 
-    <!-- GUITARRAS -->
-    <section class="categoria">
-        <h2>Guitarras</h2>
-
-        <div class="carrusel">
-            <button class="flecha izquierda" data-target="lista-guitarras">&#8249;</button>
-
-            <div class="lista-productos" id="lista-guitarras"></div>
-
-            <button class="flecha derecha" data-target="lista-guitarras">&#8250;</button>
-        </div>
-    </section>
-
-    <!-- PROTESIS -->
-    <section class="categoria">
-        <h2>Prótesis de mano</h2>
-
-        <div class="carrusel">
-            <button class="flecha izquierda" data-target="lista-protesis">&#8249;</button>
-
-            <div class="lista-productos" id="lista-protesis"></div>
-
-            <button class="flecha derecha" data-target="lista-protesis">&#8250;</button>
-        </div>
-    </section>
-
-    <script src="js/productos.js"></script>
+        <!-- ÚNICO contenedor de productos -->
+        <section id="contenedor-productos" class="contenedor-productos">
+            <!-- Se llena con Productos.js -->
+        </section>
+    </main>
 </body>
+
 </html>
