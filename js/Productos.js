@@ -5,10 +5,11 @@ let url = "http://localhost:3000";
 // Traigo los productos de la API
 async function obtenerProductos() {
     try {
-        const response = await fetch(`${url}/productos`);
+        const response = await fetch(`${url}/api/productos`);
         const data = await response.json();
         const productos = data.payload;
-        mostrarProductos(productos);
+        const productosActivos = productos.filter(p => p.activo == 1);
+        mostrarProductos(productosActivos);
     } catch (error) {
         console.error("Error obteniendo productos:", error);
     }
