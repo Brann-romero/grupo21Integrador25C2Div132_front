@@ -129,3 +129,11 @@ body {
     color: #00157a;
     border: 1px solid #00157a;
 }
+
+
+/*  Tamaño  del logo  */
+
+.header .logo img {
+    height: 120px;
+    width: auto;
+}

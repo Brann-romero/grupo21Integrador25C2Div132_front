@@ -135,3 +135,10 @@ body {
     background-color: #00157a;
     color: #ffffff;
 }
+
+/*  Tamaño  del logo  */
+
+.header .logo img {
+    height: 120px;
+    width: auto;
+}

@@ -15,5 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Redirijo a la página de productos
         window.location.href = "Productos.html";
+        
+    });
+    btnAdmin.addEventListener("click", () => {
+        window.location.href = "http://localhost:3000/"; 
     });
 });
