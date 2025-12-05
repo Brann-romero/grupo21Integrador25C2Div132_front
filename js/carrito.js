@@ -1,5 +1,3 @@
-// carrito.js
-
 document.addEventListener("DOMContentLoaded", () => {
     const tbody = document.getElementById("carrito-items");
     const spanTotal = document.getElementById("carrito-total");
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
             tr.innerHTML = `
                 <td>${item.nombre}</td>
 
-                <!-- 🔵 Botón eliminar entre nombre y cantidad  -->
                 <td><button class="btn-eliminar" data-index="${index}">Eliminar</button></td>
 
                 <td>${item.cantidad}</td>
@@ -68,8 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 
+        const nombreCliente = localStorage.getItem("clienteNombre") || "Invitado";
+
         const ticket = {
-            cliente: "Invitado",
+            cliente: nombreCliente,
             fecha: new Date().toLocaleString(),
             items: carrito.map(item => ({
                 nombre: item.nombre,

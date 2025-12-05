@@ -13,8 +13,9 @@
 <body>
     <header class="header">
         <div class="logo">
-            <div class="logo-circulo">G</div>
+            <img src="img/icono/icono.jpg" alt="Logo">
             <span>Guitanos Autoservicio</span>
+            <span>Brandon Romero y Leonel Gadea</span>
         </div>
 
         <nav class="nav">
@@ -24,6 +25,18 @@
             <a href="ticket.html">Ticket</a>
         </nav>
     </header>
+
+<section class="filtros">
+    <input type="text" id="buscarNombre" placeholder="Buscar producto por nombre">
+
+    <select id="filtroCategoria">
+        <option value="todos">Todos</option>
+        <option value="mano_protesica">Manos protésicas</option>
+        <option value="guitarra">Guitarras</option>
+    </select>
+
+    <button id="btnBuscar">Buscar</button>
+</section>
 
     <main class="main">
         <h1 class="titulo">Productos</h1>

@@ -7,6 +7,11 @@
     <link rel="icon" type="image/png" href="img/icono/icono.jpg">
     <link rel="stylesheet" href="css/ticket.css">
     <script src="js/ticket.js" defer></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- Libreria pdf -->
+
+    
+    <script src="js/ticket.js" defer></script> <!-- Tjs del ticket -->
 </head>
 <body>
     <header class="header">
@@ -44,8 +49,10 @@
         </section>
 
         <div class="acciones">
+            <button id="btn-descargar" class="btn btn-secundario">Descargar ticket en PDF</button>
             <a href="index.html" class="btn btn-principal">Volver al inicio</a>
         </div>
+
     </main>
 
 </body>

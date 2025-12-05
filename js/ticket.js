@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const btnDescargar = document.getElementById("btn-descargar");
     const spanCliente = document.getElementById("ticket-cliente");
     const spanFecha = document.getElementById("ticket-fecha");
     const contItems = document.getElementById("ticket-items");
@@ -26,4 +27,29 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         contItems.appendChild(div);
     });
+
+if (btnDescargar) {
+        btnDescargar.addEventListener("click", () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.text("Ticket de compra", 10, 10);
+            doc.text(`Cliente: ${ticket.cliente}`, 10, 20);
+            doc.text(`Fecha: ${ticket.fecha}`, 10, 30);
+
+            let y = 40;
+            ticket.items.forEach(item => {
+                doc.text(
+                    `${item.nombre} - Cant: ${item.cantidad} - Subtotal: $${item.subtotal}`,
+                    10,
+                    y
+                );
+                y += 10;
+            });
+
+            doc.text(`Total: $${ticket.total}`, 10, y + 10);
+
+            doc.save("ticket.pdf");
+        });
+    }
 });

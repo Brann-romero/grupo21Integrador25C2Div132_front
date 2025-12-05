@@ -1,6 +1,7 @@
 // Productos.js
 let contenedorProductos = document.getElementById("contenedor-productos");
 let url = "http://localhost:3000";
+let productosActivos = [];
 
 // Traigo los productos de la API
 async function obtenerProductos() {
@@ -8,12 +9,13 @@ async function obtenerProductos() {
         const response = await fetch(`${url}/api/productos`);
         const data = await response.json();
         const productos = data.payload;
-        const productosActivos = productos.filter(p => p.activo == 1);
+        productosActivos = productos.filter(p => p.activo == 1);
         mostrarProductos(productosActivos);
     } catch (error) {
         console.error("Error obteniendo productos:", error);
     }
 }
+
 
 // Armo las cards y les agrego el botón de carrito
 function mostrarProductos(array) {
@@ -82,3 +84,27 @@ function BotonesAgregar() {
 }
 
 obtenerProductos();
+
+// Filtro por nombre
+document.getElementById("btnBuscar").addEventListener("click", () => {
+    const texto = document.getElementById("buscarNombre").value.toLowerCase();
+
+    const filtrados = productosActivos.filter(prod =>
+        prod.nombre.toLowerCase().includes(texto)
+    );
+
+    mostrarProductos(filtrados);
+});
+
+// Filtro por categoria
+document.getElementById("filtroCategoria").addEventListener("change", () => {
+    const categoria = document.getElementById("filtroCategoria").value;
+
+    let filtrados = productosActivos;
+
+    if (categoria !== "todos") {
+        filtrados = productosActivos.filter(prod => prod.categoria == categoria);
+    }
+
+    mostrarProductos(filtrados);
+});
